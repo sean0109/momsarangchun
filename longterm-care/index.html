@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장기요양등급 안내 - 엄마사랑 재가복지센터</title>
+    <meta name="description" content="노인장기요양보험 제도 요약과 등급 신청 무료 대행 안내">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        .page-hero {
+            padding: 3.5rem 0 2.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+        .page-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .content-section {
+            padding: var(--spacing-xl) 0;
+        }
+        .content-section.alt {
+            background: var(--bg-light);
+        }
+
+        .lead-card {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow);
+        }
+        .lead-card p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: var(--spacing-md);
+        }
+        .lead-card p:last-child {
+            margin-bottom: 0;
+        }
+        .lead-card strong {
+            color: var(--primary-dark);
+        }
+
+        .point-list {
+            list-style: none;
+            padding: 0;
+            margin-top: var(--spacing-md);
+        }
+        .point-list li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.7rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+        .point-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .highlight-box {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow-hover);
+            text-align: center;
+            margin-top: var(--spacing-lg);
+        }
+        .highlight-box h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: var(--spacing-sm);
+        }
+        .highlight-box p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        .step {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow);
+        }
+        .step-num {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        .step h4 {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+        }
+        .step p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 544px) {
+            .content-section { padding: var(--spacing-lg) 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 (공통 컴포넌트: /partials/header.html 을 JS로 삽입) -->
+    <div id="site-header"></div>
+
+    <!-- 페이지 타이틀 -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>장기요양등급 안내</h1>
+            <p>노인장기요양보험 제도와 등급 신청을 쉽게 안내해 드립니다</p>
+        </div>
+    </section>
+
+    <!-- 제도 요약 -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">About the System</span>
+                <h2 class="section-title">노인장기요양보험 <span class="highlight">제도 요약</span></h2>
+                <p class="section-description">
+                    어렵게 느껴지는 제도, 핵심만 쉽게 정리했습니다
+                </p>
+            </div>
+
+            <div class="lead-card">
+                <p>
+                    <strong>노인장기요양보험</strong>은 고령이나 노인성 질병 등으로 혼자
+                    일상생활을 하기 어려운 어르신께, 신체활동·가사활동 등 장기요양 서비스를
+                    국가가 지원하는 <strong>사회보험 제도</strong>입니다.
+                </p>
+                <p>
+                    국민건강보험공단이 운영하며, 방문조사와 등급판정위원회의 심사를 거쳐
+                    <strong>장기요양등급(1~5등급, 인지지원등급)</strong>이 결정됩니다.
+                    등급을 받으시면 방문요양 등 재가급여 또는 시설급여를 이용하실 수 있고,
+                    비용의 대부분을 보험에서 부담하므로 본인부담은 일부에 그칩니다.
+                </p>
+                <ul class="point-list">
+                    <li>대상: 만 65세 이상 어르신, 또는 65세 미만이라도 노인성 질병이 있는 분</li>
+                    <li>등급: 1등급(가장 도움이 많이 필요) ~ 5등급, 인지지원등급</li>
+                    <li>혜택: 방문요양·방문목욕·주야간보호 등 다양한 급여 이용 가능</li>
+                    <li>비용: 보험이 대부분 부담, 본인부담률은 소득 수준에 따라 차등</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 등급 신청 대행 -->
+    <section class="content-section alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Application Support</span>
+                <h2 class="section-title">등급 신청, <span class="highlight">무료로 대행</span>해 드립니다</h2>
+                <p class="section-description">
+                    복잡한 서류와 절차, 어르신과 가족 대신 센터가 처음부터 끝까지 도와드립니다
+                </p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h4>신청서 접수</h4>
+                    <p>장기요양인정 신청서 작성을 센터에서 대신 도와드립니다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h4>의사소견서 안내</h4>
+                    <p>필요 서류와 의사소견서 발급 절차를 친절하게 안내합니다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h4>방문조사 동행</h4>
+                    <p>공단 방문조사 시 필요한 준비와 설명을 함께 지원합니다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h4>등급 판정 안내</h4>
+                    <p>결과 확인과 이후 서비스 연결까지 끝까지 챙겨드립니다.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>서류 작성·신청 대행, 비용 0원</h3>
+                <p>어렵고 번거로운 행정 절차, 전문 상담사가 무료로 모두 처리해 드립니다</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">등급 신청, 어디서부터 할지 막막하신가요?</h2>
+                <p class="cta-description">전화 한 통이면 전문 상담사가 모두 안내해 드립니다</p>
+                <div class="cta-buttons">
+                    <a href="tel:02-1234-5678" class="btn btn-large btn-white">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M17.924 15.617l-3.588-1.537a1 1 0 00-1.068.165l-1.555 1.555a15.432 15.432 0 01-6.513-6.513l1.555-1.555a1 1 0 00.165-1.068L5.383 2.076a1 1 0 00-1.068-.465L1.924 2.076a1 1 0 00-.689.948c0 8.837 7.163 16 16 16a1 1 0 00.948-.689l.465-2.391a1 1 0 00-.465-1.068z"/>
+                        </svg>
+                        02-1234-5678
+                    </a>
+                    <a href="/support" class="btn btn-large btn-outline-white">온라인 문의</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 (공통 컴포넌트: /partials/footer.html 을 JS로 삽입) -->
+    <div id="site-footer"></div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# cafe24 배포 전 로컬 검증용 Apache 서버
+# 실행:  docker compose up --build      (http://localhost:8080)
+# 종료:  docker compose down
+#
+# 프로젝트 루트를 그대로 Apache 문서 루트(htdocs)에 연결하므로,
+# cafe24 www 폴더에 올린 것과 동일한 조건으로 .htaccess / 클린 URL 검증 가능.
+services:
+  web:
+    build: ./docker
+    container_name: htmlproject-cafe24-local
+    ports:
+      - "8080:80"
+    volumes:
+      # 루트를 읽기 전용으로 마운트 — 파일 수정 시 새로고침만 하면 즉시 반영
+      - ./:/usr/local/apache2/htdocs/:ro
+    restart: unless-stopped

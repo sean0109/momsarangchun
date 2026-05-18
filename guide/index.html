@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용안내 및 비용 - 엄마사랑 재가복지센터</title>
+    <meta name="description" content="서비스 이용 절차와 등급별 한도액·본인부담금 안내">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        .page-hero {
+            padding: 3.5rem 0 2.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+        .page-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .content-section {
+            padding: var(--spacing-xl) 0;
+        }
+        .content-section.alt {
+            background: var(--bg-light);
+        }
+
+        /* 이용 절차 */
+        .process {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        .process-step {
+            position: relative;
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        .process-step .num {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto var(--spacing-sm);
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .process-step h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .process-step p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 비용 표 */
+        .table-wrap {
+            overflow-x: auto;
+            background: white;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow);
+            margin-top: var(--spacing-lg);
+        }
+        table.cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 520px;
+        }
+        table.cost-table th,
+        table.cost-table td {
+            padding: 1rem 1.2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--bg-gray);
+        }
+        table.cost-table thead th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 700;
+        }
+        table.cost-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        table.cost-table td.label {
+            font-weight: 700;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+        .table-note {
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: #FFF8E1;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 921px) {
+            .process { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 544px) {
+            .content-section { padding: var(--spacing-lg) 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 (공통 컴포넌트: /partials/header.html 을 JS로 삽입) -->
+    <div id="site-header"></div>
+
+    <!-- 페이지 타이틀 -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>이용안내 및 비용</h1>
+            <p>처음이셔도 걱정 마세요. 절차와 비용을 투명하게 안내해 드립니다</p>
+        </div>
+    </section>
+
+    <!-- 이용 절차 -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Process</span>
+                <h2 class="section-title">서비스 <span class="highlight">이용 절차</span></h2>
+                <p class="section-description">
+                    상담부터 요양보호사 매칭까지, 3단계로 간단합니다
+                </p>
+            </div>
+
+            <div class="process">
+                <div class="process-step">
+                    <div class="num">1</div>
+                    <h4>상담</h4>
+                    <p>전화 또는 방문으로 어르신 상태와 필요한 서비스를 상담합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="num">2</div>
+                    <h4>방문 · 계약</h4>
+                    <p>센터가 방문하여 상태를 확인하고, 서비스 내용과 일정을 계약합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="num">3</div>
+                    <h4>요양보호사 매칭</h4>
+                    <p>어르신께 잘 맞는 전문 요양보호사를 배정하여 돌봄을 시작합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 비용 안내 -->
+    <section class="content-section alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Cost</span>
+                <h2 class="section-title">비용 <span class="highlight">안내</span></h2>
+                <p class="section-description">
+                    등급별 월 이용 한도액과 소득 수준별 본인부담률 안내입니다
+                </p>
+            </div>
+
+            <h3 style="color:var(--text-dark);font-size:1.2rem;margin-bottom:0.5rem;">① 등급별 월 이용 한도액 (재가급여)</h3>
+            <div class="table-wrap">
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>장기요양등급</th>
+                            <th>월 이용 한도액(예시)</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="label">1등급</td><td>2,069,900원</td><td>도움이 가장 많이 필요</td></tr>
+                        <tr><td class="label">2등급</td><td>1,869,600원</td><td>상당한 도움 필요</td></tr>
+                        <tr><td class="label">3등급</td><td>1,455,800원</td><td>부분적 도움 필요</td></tr>
+                        <tr><td class="label">4등급</td><td>1,341,800원</td><td>일정 부분 도움 필요</td></tr>
+                        <tr><td class="label">5등급</td><td>1,151,600원</td><td>치매 특별등급</td></tr>
+                        <tr><td class="label">인지지원등급</td><td>643,700원</td><td>경증 치매</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="color:var(--text-dark);font-size:1.2rem;margin:var(--spacing-lg) 0 0.5rem;">② 소득 수준별 본인부담률 (재가급여)</h3>
+            <div class="table-wrap">
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>본인부담률</th>
+                            <th>대상</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="label">일반 대상자</td><td>15%</td><td>감경 대상이 아닌 일반 가입자</td></tr>
+                        <tr><td class="label">감경 대상 (40% 감경)</td><td>9%</td><td>건강보험료 순위 25% 초과 ~ 50% 이하</td></tr>
+                        <tr><td class="label">감경 대상 (60% 감경)</td><td>6%</td><td>건강보험료 순위 0 ~ 25% 이하</td></tr>
+                        <tr><td class="label">기초생활수급자</td><td>0% (면제)</td><td>국민기초생활수급권자(의료급여 등)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-note">
+                ※ 위 한도액·부담률은 제도 이해를 돕기 위한 <strong>예시(기준 연도 고시 기준)</strong>입니다.
+                실제 금액과 감경 기준은 매년 보건복지부 고시에 따라 변경되므로,
+                정확한 비용은 <strong>상담 시 개별 안내</strong>해 드립니다.
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">비용이 얼마나 나올지 궁금하신가요?</h2>
+                <p class="cta-description">어르신 등급과 상황에 맞춰 예상 비용을 안내해 드립니다</p>
+                <div class="cta-buttons">
+                    <a href="tel:02-1234-5678" class="btn btn-large btn-white">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M17.924 15.617l-3.588-1.537a1 1 0 00-1.068.165l-1.555 1.555a15.432 15.432 0 01-6.513-6.513l1.555-1.555a1 1 0 00.165-1.068L5.383 2.076a1 1 0 00-1.068-.465L1.924 2.076a1 1 0 00-.689.948c0 8.837 7.163 16 16 16a1 1 0 00.948-.689l.465-2.391a1 1 0 00-.465-1.068z"/>
+                        </svg>
+                        02-1234-5678
+                    </a>
+                    <a href="/support" class="btn btn-large btn-outline-white">온라인 문의</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 (공통 컴포넌트: /partials/footer.html 을 JS로 삽입) -->
+    <div id="site-footer"></div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+# ===== OS 부산물 =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== 에디터 / IDE =====
+# JetBrains (IntelliJ 등)
+.idea/
+*.iml
+*.iws
+*.ipr
+# VS Code
+.vscode/
+# Vim / 임시 편집 파일
+*.swp
+*.swo
+*~
+
+# ===== 로그 / 임시 =====
+*.log
+*.tmp
+
+# ===== Claude Code (로컬 개인 설정) =====
+.claude/settings.local.json
+
+# ===== 내부 작업 문서 (공개 레포 제외) =====
+DESIGN_REFERENCE.md
+todo.md
+CLAUDE.md
+IMAGE_GUIDE.md

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오시는 길 - 엄마사랑 재가복지센터</title>
+    <meta name="description" content="엄마사랑 재가복지센터 오시는 길 안내">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- 네이버 지도 API -->
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_NAVER_MAP_CLIENT_ID"></script>
+
+    <style>
+        /* 페이지 특화 스타일 */
+        .location-hero {
+            padding: 3rem 0 2rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .location-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .location-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .map-section {
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .location-info {
+            padding: var(--spacing-xl) 0;
+            background: var(--bg-light);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .info-card {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--box-shadow);
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-card p {
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card strong {
+            color: var(--text-dark);
+        }
+
+        .transport-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .transport-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--bg-gray);
+            color: var(--text-medium);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .transport-list li:last-child {
+            border-bottom: none;
+        }
+
+        .transport-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .badge-subway {
+            background: #00A84D;
+            color: white;
+        }
+
+        .badge-bus {
+            background: #3D5AFE;
+            color: white;
+        }
+
+        .contact-cta {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .contact-cta h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-cta p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 544px) {
+            #map {
+                height: 350px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 (공통 컴포넌트: /partials/header.html 을 JS로 삽입) -->
+    <div id="site-header"></div>
+
+    <!-- 페이지 타이틀 -->
+    <section class="location-hero">
+        <div class="container">
+            <h1>오시는 길</h1>
+            <p>엄마사랑 재가복지센터로 오시는 길을 안내해드립니다</p>
+        </div>
+    </section>
+
+    <!-- 지도 섹션 -->
+    <section class="map-section">
+        <div id="map"></div>
+    </section>
+
+    <!-- 위치 정보 -->
+    <section class="location-info">
+        <div class="container">
+            <div class="info-grid">
+                <!-- 주소 -->
+                <div class="info-card">
+                    <h3>
+                        <span class="info-card-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <path d="M16 4C11.589 4 8 7.589 8 12C8 18 16 28 16 28C16 28 24 18 24 12C24 7.589 20.411 4 16 4ZM16 15C14.343 15 13 13.657 13 12C13 10.343 14.343 9 16 9C17.657 9 19 10.343 19 12C19 13.657 17.657 15 16 15Z" fill="#4CAF50"/>
+                            </svg>
+                        </span>
+                        주소
+                    </h3>
+                    <p><strong>서울시 중랑구 동일로 152길 23-1, 1층 (묵동)</strong></p>
+                    <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bg-gray);">
+                        <strong>대표전화:</strong> 02-1234-5678<br>
+                        <strong>이메일:</strong> info@ommasarang.co.kr
+                    </p>
+                </div>
+
+                <!-- 대중교통 -->
+                <div class="info-card">
+                    <h3>
+                        <span class="info-card-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <path d="M16 6C12 6 9 7 9 8V20C9 21.105 9.895 22 11 22L10 24V25H11L13 22H19L21 25H22V24L21 22C22.105 22 23 21.105 23 20V8C23 7 20 6 16 6ZM12 19C11.448 19 11 18.552 11 18C11 17.448 11.448 17 12 17C12.552 17 13 17.448 13 18C13 18.552 12.552 19 12 19ZM14 13V9H18V13H14ZM20 19C19.448 19 19 18.552 19 18C19 17.448 19.448 17 20 17C20.552 17 21 17.448 21 18C21 18.552 20.552 19 20 19Z" fill="#4CAF50"/>
+                            </svg>
+                        </span>
+                        대중교통
+                    </h3>
+                    <ul class="transport-list">
+                        <li>
+                            <span class="transport-badge badge-subway">지하철</span>
+                            <span>1호선 먹골역 4번 출구 도보 5분</span>
+                        </li>
+                        <li>
+                            <span class="transport-badge badge-bus">버스</span>
+                            <span>273, 1136, 1137번 '묵동 우성아파트' 하차</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 운영시간 -->
+                <div class="info-card">
+                    <h3>
+                        <span class="info-card-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <path d="M16 4C9.373 4 4 9.373 4 16C4 22.627 9.373 28 16 28C22.627 28 28 22.627 28 16C28 9.373 22.627 4 16 4ZM16 26C10.486 26 6 21.514 6 16C6 10.486 10.486 6 16 6C21.514 6 26 10.486 26 16C26 21.514 21.514 26 16 26ZM17 10H15V17L21 20.5L22 18.8L17 16V10Z" fill="#4CAF50"/>
+                            </svg>
+                        </span>
+                        운영시간
+                    </h3>
+                    <p><strong>평일:</strong> 09:00 - 18:00</p>
+                    <p><strong>토요일:</strong> 09:00 - 13:00</p>
+                    <p><strong>일요일/공휴일:</strong> 휴무</p>
+                    <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bg-gray); font-size: 0.95rem;">
+                        * 방문 상담은 사전 예약 후 이용 가능합니다
+                    </p>
+                </div>
+            </div>
+
+            <!-- 상담 문의 CTA -->
+            <div class="contact-cta">
+                <h3>방문 전 상담 예약을 해주세요</h3>
+                <p>전문 상담사가 친절하게 안내해드립니다</p>
+                <div class="contact-buttons">
+                    <a href="tel:02-1234-5678" class="btn btn-primary btn-large">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M17.924 15.617l-3.588-1.537a1 1 0 00-1.068.165l-1.555 1.555a15.432 15.432 0 01-6.513-6.513l1.555-1.555a1 1 0 00.165-1.068L5.383 2.076a1 1 0 00-1.068-.465L1.924 2.076a1 1 0 00-.689.948c0 8.837 7.163 16 16 16a1 1 0 00.948-.689l.465-2.391a1 1 0 00-.465-1.068z"/>
+                        </svg>
+                        전화 상담하기
+                    </a>
+                    <a href="/" class="btn btn-outline btn-large" style="color: var(--primary-color); border-color: var(--primary-color);">
+                        홈으로 돌아가기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 (공통 컴포넌트: /partials/footer.html 을 JS로 삽입) -->
+    <div id="site-footer"></div>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // 네이버 지도 초기화
+        // 주의: 네이버 클라우드 플랫폼에서 API 키를 발급받아 위 script 태그의 YOUR_NAVER_MAP_CLIENT_ID를 교체해주세요
+        // API 키 발급: https://www.ncloud.com/product/applicationService/maps
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 센터 위치 좌표 (서울시 중랑구 동일로 152길 23-1)
+            // 아래 좌표는 근사치이므로, 정확한 좌표로 수정이 필요할 수 있습니다
+            var centerLocation = new naver.maps.LatLng(37.6145, 127.0771);
+
+            // 지도 옵션
+            var mapOptions = {
+                center: centerLocation,
+                zoom: 17,
+                zoomControl: true,
+                zoomControlOptions: {
+                    position: naver.maps.Position.TOP_RIGHT
+                }
+            };
+
+            // 지도 생성
+            var map = new naver.maps.Map('map', mapOptions);
+
+            // 마커 생성
+            var marker = new naver.maps.Marker({
+                position: centerLocation,
+                map: map,
+                title: '엄마사랑 재가복지센터'
+            });
+
+            // 정보창 내용
+            var contentString = [
+                '<div style="padding:15px;max-width:300px;font-family:Noto Sans KR, sans-serif;">',
+                '   <h4 style="margin:0 0 10px;color:#4CAF50;font-size:16px;font-weight:700;">엄마사랑 재가복지센터</h4>',
+                '   <p style="margin:0 0 8px;font-size:14px;color:#546E7A;">서울시 중랑구 동일로 152길 23-1, 1층 (묵동)</p>',
+                '   <p style="margin:0;font-size:13px;color:#78909C;">먹골역 4번출구 도보 5분</p>',
+                '   <hr style="margin:10px 0;border:none;border-top:1px solid #ECEFF1;">',
+                '   <p style="margin:0;font-size:13px;color:#546E7A;"><strong>전화:</strong> 02-1234-5678</p>',
+                '</div>'
+            ].join('');
+
+            // 정보창 생성
+            var infowindow = new naver.maps.InfoWindow({
+                content: contentString,
+                maxWidth: 300,
+                backgroundColor: "#fff",
+                borderColor: "#4CAF50",
+                borderWidth: 2,
+                anchorSize: new naver.maps.Size(10, 10),
+                anchorSkew: true,
+                anchorColor: "#fff",
+                pixelOffset: new naver.maps.Point(0, -10)
+            });
+
+            // 정보창 열기
+            infowindow.open(map, marker);
+
+            // 마커 클릭 이벤트
+            naver.maps.Event.addListener(marker, "click", function(e) {
+                if (infowindow.getMap()) {
+                    infowindow.close();
+                } else {
+                    infowindow.open(map, marker);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
