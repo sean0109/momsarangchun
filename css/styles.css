@@ -405,6 +405,7 @@ button {
 
 .featured-badge {
     position: absolute;
+    z-index: 2;
     top: -12px;
     right: 30px;
     background: var(--secondary-color);
@@ -418,6 +419,44 @@ button {
 
 .service-icon {
     margin-bottom: var(--spacing-md);
+}
+
+/* 서비스 카드 원형 사진 (이미지 캡쳐 디자인 - 카드 위로 돌출) */
+.service-image {
+    position: relative;
+    z-index: 1;
+    /* 원이 카드 콘텐츠 폭보다 커도 카드 정중앙에 고정 (margin:auto 는 이 경우 중앙정렬 실패) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    /* 음수 위 여백 → 원형 윗부분이 카드 밖으로 튀어나옴 */
+    margin: -110px 0 var(--spacing-md);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 10px solid var(--primary-light);
+    background: var(--bg-gray);
+    box-shadow: var(--box-shadow);
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.service-image.ring-green { border-color: #81C784; }
+.service-image.ring-blue  { border-color: #90CAF9; }
+.service-image.ring-cream { border-color: #FFE0B2; }
+
+@media (max-width: 544px) {
+    .service-image {
+        width: 240px;
+        height: 240px;
+        margin-top: -80px;
+        border-width: 7px;
+    }
 }
 
 .service-title {
