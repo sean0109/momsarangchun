@@ -78,7 +78,7 @@
             color: var(--primary-color);
         }
 
-        /* 시설소개 */
+        /* 시설소개 (2개 카드: 작은 행정사무실 / 큰 상담실&휴게공간) */
         .facility-section {
             padding: var(--spacing-xl) 0;
             background: var(--bg-light);
@@ -86,15 +86,18 @@
 
         .facility-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 1fr 2fr;  /* 좌:우 = 1:2 비대칭 */
             gap: var(--spacing-lg);
+            align-items: stretch;
         }
 
         .facility-card {
             background: white;
-            padding: var(--spacing-lg);
             border-radius: var(--border-radius-large);
             box-shadow: var(--box-shadow);
+            overflow: hidden;                 /* 이미지 모서리 라운드 클리핑 */
+            display: flex;
+            flex-direction: column;
             transition: var(--transition);
         }
 
@@ -103,20 +106,54 @@
             box-shadow: var(--box-shadow-hover);
         }
 
-        .facility-icon {
-            margin-bottom: var(--spacing-md);
+        /* 단일 이미지 영역 (행정사무실) */
+        .facility-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .facility-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .facility-card h3 {
+        /* 두 이미지 가로 50:50 (상담실 & 휴게공간) */
+        .facility-image-pair {
+            width: 100%;
+            aspect-ratio: 4/3;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            overflow: hidden;
+        }
+        .facility-image-pair img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .facility-body {
+            padding: var(--spacing-lg);
+            flex: 1;
+        }
+
+        .facility-body h3 {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: var(--spacing-sm);
         }
 
-        .facility-card p {
+        .facility-body p {
             color: var(--text-medium);
             line-height: 1.7;
+            margin-bottom: var(--spacing-sm);
+        }
+        .facility-body p:last-child {
+            margin-bottom: 0;
         }
 
         @media (max-width: 921px) {
@@ -128,6 +165,10 @@
             .greeting-image {
                 max-width: 360px;
                 margin: 0 auto;
+            }
+
+            .facility-grid {
+                grid-template-columns: 1fr;   /* 태블릿 이하: 위아래로 스택 */
             }
         }
 
@@ -162,8 +203,7 @@
             <div class="greeting-content">
                 <div class="greeting-image">
                     <div class="image-placeholder">
-                        <!-- 여기에 센터장 사진을 넣어주세요 (images/director.jpg) -->
-                        <img src="../images/director.jpg" alt="엄마사랑 재가복지센터 센터장">
+                        <img src="../images/introduce_01.jpg" alt="엄마사랑 재가복지센터 센터장">
                     </div>
                 </div>
                 <div class="greeting-text">
@@ -175,25 +215,25 @@
                             진심으로 환영합니다.
                         </p>
                         <p>
+                            안녕하세요. 엄마사랑 재가복지센터입니다.
                             저희 센터는 어르신 한 분 한 분을 <strong>내 부모님처럼</strong>
-                            모신다는 마음으로 시작했습니다. 나이가 들어도 익숙한 집과 가족 곁에서
-                            존엄하고 편안한 일상을 이어가실 수 있도록, 전문 인력과 따뜻한 정성으로
-                            함께하겠습니다.
+                            모신다는 진실된 마음으로 시작했습니다. 어르신께서 나이가 드셔도 가장
+                            익숙한 집과 사랑하는 가족 곁에서 존엄하고 편안한 일상을 이어가실 수
+                            있도록, 전문적인 케어와 따뜻한 정성으로 함께하겠습니다.
                         </p>
                         <p>
-                            국가 자격을 갖춘 요양보호사와 간호 인력이 어르신의 건강과 생활을
-                            세심하게 살피며, 가족분들이 안심하실 수 있도록 투명하게 소통하겠습니다.
-                            어르신의 행복한 노후가 곧 저희의 보람입니다.
+                            국가 자격을 갖춘 전문 요양보호사가 어르신의 건강과 생활을 세심하게
+                            살피며, 보호자님께서 늘 안심하실 수 있도록 투명하게 소통하겠습니다.
+                            어르신의 행복한 노후가 곧 저희의 가장 큰 보람입니다.
                         </p>
                         <p>
-                            언제든 편하게 문의해 주십시오. 늘 처음의 마음으로 정성을 다하겠습니다.
-                            감사합니다.
+                            도움이 필요하시다면 언제든 편하게 문의해 주십시오. 늘 처음과 같은
+                            마음으로 정성을 다하겠습니다. 감사합니다.
                         </p>
                     </div>
                     <p class="greeting-signature">
                         엄마사랑 재가복지센터
-                        <!-- 실제 센터장 성함으로 교체해 주세요 -->
-                        <strong>센터장 ○ ○ ○ 드림</strong>
+                        <strong>센터장 유 윤 희 드림</strong>
                     </p>
                 </div>
             </div>
@@ -212,60 +252,37 @@
             </div>
 
             <div class="facility-grid">
+                <!-- 행정 사무실 (작은 카드) -->
                 <div class="facility-card">
-                    <div class="facility-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="28" fill="#E8F5E9"/>
-                            <path d="M20 21C20 19.895 20.895 19 22 19H38C39.105 19 40 19.895 40 21V33C40 34.105 39.105 35 38 35H27L21 40V35H22C20.895 35 20 34.105 20 33V21Z" fill="#4CAF50"/>
-                        </svg>
+                    <div class="facility-image">
+                        <img src="../images/about_01.jpg" alt="행정 사무실">
                     </div>
-                    <h3>상담실</h3>
-                    <p>
-                        어르신과 보호자가 편안하게 상담받으실 수 있는 독립된 공간입니다.
-                        개인 정보를 보호하며 1:1 맞춤 상담을 진행합니다.
-                    </p>
+                    <div class="facility-body">
+                        <h3>행정 사무실</h3>
+                        <p>
+                            장기요양등급 신청, 서류 대행, 각종 행정 업무를 지원합니다.
+                            복잡한 절차를 친절하게 안내해 드립니다.
+                        </p>
+                    </div>
                 </div>
 
+                <!-- 상담실 & 휴게공간 (큰 카드, 이미지 좌우 50:50) -->
                 <div class="facility-card">
-                    <div class="facility-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="28" fill="#FFF3E0"/>
-                            <path d="M30 17C26.686 17 24 19.686 24 23C24 26.314 26.686 29 30 29C33.314 29 36 26.314 36 23C36 19.686 33.314 17 30 17ZM19 41C19 36.582 23.925 33 30 33C36.075 33 41 36.582 41 41V43H19V41Z" fill="#FF9800"/>
-                        </svg>
+                    <div class="facility-image-pair">
+                        <img src="../images/about_02.jpg" alt="상담실">
+                        <img src="../images/about_03.jpg" alt="휴게공간">
                     </div>
-                    <h3>프로그램 활동실</h3>
-                    <p>
-                        신체 활동, 인지 활동, 여가 프로그램이 진행되는 넓고 밝은 공간입니다.
-                        미끄럼 방지 바닥재로 안전하게 시공되었습니다.
-                    </p>
-                </div>
-
-                <div class="facility-card">
-                    <div class="facility-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="28" fill="#E3F2FD"/>
-                            <path d="M30 18C24.477 18 20 22.477 20 28C20 35 30 43 30 43C30 43 40 35 40 28C40 22.477 35.523 18 30 18ZM30 31.5C28.067 31.5 26.5 29.933 26.5 28C26.5 26.067 28.067 24.5 30 24.5C31.933 24.5 33.5 26.067 33.5 28C33.5 29.933 31.933 31.5 30 31.5Z" fill="#2196F3"/>
-                        </svg>
+                    <div class="facility-body">
+                        <h3>상담실 &amp; 휴게공간</h3>
+                        <p>
+                            어르신과 보호자가 편안하게 상담받으실 수 있는 공간입니다.
+                            개인정보를 보호하며 1:1 맞춤 상담을 진행합니다.
+                        </p>
+                        <p>
+                            어르신이 편히 쉬실 수 있는 안락한 휴게공간을 마련했습니다.
+                            채광을 고려한 쾌적한 환경을 유지합니다.
+                        </p>
                     </div>
-                    <h3>휴게 공간</h3>
-                    <p>
-                        어르신이 편히 쉬실 수 있는 안락한 휴게 공간을 마련했습니다.
-                        채광과 환기를 고려해 쾌적한 환경을 유지합니다.
-                    </p>
-                </div>
-
-                <div class="facility-card">
-                    <div class="facility-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="28" fill="#E8F5E9"/>
-                            <path d="M21 20H39C40.105 20 41 20.895 41 22V38C41 39.105 40.105 40 39 40H21C19.895 40 19 39.105 19 38V22C19 20.895 19.895 20 21 20ZM24 26H36V28H24V26ZM24 31H36V33H24V31Z" fill="#4CAF50"/>
-                        </svg>
-                    </div>
-                    <h3>행정 사무실</h3>
-                    <p>
-                        장기요양등급 신청, 서류 대행, 각종 행정 업무를 지원합니다.
-                        복잡한 절차를 친절하게 안내해 드립니다.
-                    </p>
                 </div>
             </div>
         </div>
@@ -278,11 +295,11 @@
                 <h2 class="cta-title">궁금한 점이 있으신가요?<br>편하게 문의해 주세요</h2>
                 <p class="cta-description">전문 상담사가 친절하게 안내해드립니다</p>
                 <div class="cta-buttons">
-                    <a href="tel:02-1234-5678" class="btn btn-large btn-white">
+                    <a href="tel:02-6052-8629" class="btn btn-large btn-white">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M17.924 15.617l-3.588-1.537a1 1 0 00-1.068.165l-1.555 1.555a15.432 15.432 0 01-6.513-6.513l1.555-1.555a1 1 0 00.165-1.068L5.383 2.076a1 1 0 00-1.068-.465L1.924 2.076a1 1 0 00-.689.948c0 8.837 7.163 16 16 16a1 1 0 00.948-.689l.465-2.391a1 1 0 00-.465-1.068z"/>
                         </svg>
-                        02-1234-5678
+                        02-6052-8629
                     </a>
                     <a href="/contact" class="btn btn-large btn-outline-white">오시는 길</a>
                 </div>

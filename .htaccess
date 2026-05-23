@@ -1,3 +1,8 @@
+# DirectoryIndex: 디렉토리 접근 시 우선 탐색할 파일 목록
+# - 각 서브페이지를 디렉토리명.html 로 두기 위해 후보 파일명들을 명시
+# - 예) /about/ 진입 시 about.html, /guide/ 진입 시 guide.html
+DirectoryIndex index.html about.html contact.html guide.html longterm-care.html services.html support.html
+
 # Enable URL rewriting
 RewriteEngine On
 
