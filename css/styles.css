@@ -128,7 +128,7 @@ button {
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-link {
@@ -138,27 +138,12 @@ button {
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     position: relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) scaleX(0);
-    width: 80%;
-    height: 3px;
-    background: var(--gradient-primary);
-    border-radius: 2px;
-    transition: transform 0.3s ease;
+    white-space: nowrap;       /* 메뉴 글자 줄바꿈 방지 (예: '장기요양등급 안내') */
+    flex-shrink: 0;            /* flex 컨테이너 안에서 축소 금지 */
 }
 
 .nav-link:hover, .nav-link.active {
     color: var(--primary-color);
-}
-
-.nav-link:hover::after, .nav-link.active::after {
-    transform: translateX(-50%) scaleX(1);
 }
 
 /* 모바일 메뉴 토글 */
@@ -176,6 +161,39 @@ button {
     background: var(--text-dark);
     border-radius: 2px;
     transition: var(--transition);
+}
+
+/* ========================================
+   우측 고정 책갈피 (네이버 블로그 링크)
+   - 스크롤해도 따라옴, 모든 페이지 공통
+   ======================================== */
+.blog-bookmark {
+    position: fixed;
+    top: 180px;
+    right: 0;
+    z-index: 900;
+    transition: transform 0.25s ease;
+}
+
+.blog-bookmark img {
+    display: block;
+    width: 140px;             /* 원본 390px → 데스크탑 표시 폭 */
+    height: auto;
+    box-shadow: -3px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.blog-bookmark:hover {
+    transform: translateX(-6px);   /* 호버 시 살짝 왼쪽으로 빠져나옴 */
+}
+
+@media (max-width: 921px) {
+    .blog-bookmark { top: 150px; }
+    .blog-bookmark img { width: 110px; }
+}
+
+@media (max-width: 544px) {
+    .blog-bookmark { top: 130px; }
+    .blog-bookmark img { width: 90px; }
 }
 
 /* ========================================
@@ -515,6 +533,10 @@ button {
 
 .why-image {
     position: relative;
+}
+
+.why-image .image-placeholder {
+    aspect-ratio: 1367 / 1278;
 }
 
 .image-placeholder {

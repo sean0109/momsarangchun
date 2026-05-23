@@ -86,7 +86,7 @@
 
         .facility-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;  /* 좌:우 = 1:2 비대칭 */
+            grid-template-columns: 1fr 1fr 1fr;  /* 3개 카드 균등 분할 */
             gap: var(--spacing-lg);
             align-items: stretch;
         }
@@ -106,7 +106,7 @@
             box-shadow: var(--box-shadow-hover);
         }
 
-        /* 단일 이미지 영역 (행정사무실) */
+        /* 단일 이미지 영역 (모든 카드 공통, 행정사무실과 동일 사이즈) */
         .facility-image {
             width: 100%;
             aspect-ratio: 4/3;
@@ -119,20 +119,14 @@
             display: block;
         }
 
-        /* 두 이미지 가로 50:50 (상담실 & 휴게공간) */
-        .facility-image-pair {
-            width: 100%;
-            aspect-ratio: 4/3;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px;
-            overflow: hidden;
+        /* 빈 이미지 자리 (재가복지센터: 사진 미정 — 그라데이션 배경) */
+        .facility-image.empty {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
         }
-        .facility-image-pair img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+
+        /* 사진의 아래쪽 위주로 보이게 (천장 등 위쪽 일부 가리기) */
+        .facility-image.crop-bottom img {
+            object-position: bottom center;
         }
 
         .facility-body {
@@ -252,7 +246,20 @@
             </div>
 
             <div class="facility-grid">
-                <!-- 행정 사무실 (작은 카드) -->
+                <!-- 재가복지센터 (1층 위치 안내, 사진 미정) -->
+                <div class="facility-card">
+                    <div class="facility-image empty"></div>
+                    <div class="facility-body">
+                        <h3>재가복지센터</h3>
+                        <p>
+                            저희 엄마사랑 재가복지센터는 <strong>'1층'</strong>에 위치하며
+                            심신이 허약하신 어르신들도 계단이나 엘리베이터의 불편함 없이
+                            안전하고 편리하게 진출입하실 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 행정 사무실 -->
                 <div class="facility-card">
                     <div class="facility-image">
                         <img src="../images/about_01.jpg" alt="행정 사무실">
@@ -266,21 +273,16 @@
                     </div>
                 </div>
 
-                <!-- 상담실 & 휴게공간 (큰 카드, 이미지 좌우 50:50) -->
+                <!-- 상담실 (about_02.jpg, 아래쪽 위주로 표시해 천장 가림) -->
                 <div class="facility-card">
-                    <div class="facility-image-pair">
+                    <div class="facility-image crop-bottom">
                         <img src="../images/about_02.jpg" alt="상담실">
-                        <img src="../images/about_03.jpg" alt="휴게공간">
                     </div>
                     <div class="facility-body">
-                        <h3>상담실 &amp; 휴게공간</h3>
+                        <h3>상담실</h3>
                         <p>
                             어르신과 보호자가 편안하게 상담받으실 수 있는 공간입니다.
                             개인정보를 보호하며 1:1 맞춤 상담을 진행합니다.
-                        </p>
-                        <p>
-                            어르신이 편히 쉬실 수 있는 안락한 휴게공간을 마련했습니다.
-                            채광을 고려한 쾌적한 환경을 유지합니다.
                         </p>
                     </div>
                 </div>
