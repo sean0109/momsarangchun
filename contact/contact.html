@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <!-- 네이버 지도 API -->
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_NAVER_MAP_CLIENT_ID"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=w4it1z6u7p"></script>
 
     <style>
         /* 페이지 특화 스타일 */
@@ -31,6 +31,15 @@
         .location-hero p {
             font-size: 1.2rem;
             opacity: 0.95;
+        }
+
+        /* 모바일에서 끝 글자('다')만 줄바꿈되는 것 방지 → 한 줄 + 화면 폭에 맞춰 자동 축소
+           문구 실측 폭 ≈ 21em → (화면폭 - 좌우여백)을 22로 나눠 항상 한 줄에 들어가게 함 */
+        @media (max-width: 921px) {
+            .location-hero p {
+                white-space: nowrap;
+                font-size: min(1.2rem, calc((100vw - 40px) / 22));
+            }
         }
 
         .map-section {
@@ -171,6 +180,13 @@
             .btn {
                 width: 100%;
             }
+
+            /* 모바일: '방문 전 상담 예약을 해주세요' 가 '요' 만 따로 떨어지지 않고
+               한 줄로 보이도록 줄바꿈 방지 + 폭에 맞춰 폰트 살짝 축소 */
+            .contact-cta h3 {
+                white-space: nowrap;
+                font-size: min(1.8rem, calc((100vw - 120px) / 13));
+            }
         }
     </style>
 </head>
@@ -208,7 +224,7 @@
                     <p><strong>서울시 중랑구 동일로 152길 23-1, 1층 (묵동)</strong></p>
                     <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bg-gray);">
                         <strong>대표전화:</strong> 02-6052-8629<br>
-                        <strong>이메일:</strong> info@ommasarang.co.kr
+                        <strong>이메일:</strong> yk8628@naver.com
                     </p>
                 </div>
 
@@ -225,11 +241,11 @@
                     <ul class="transport-list">
                         <li>
                             <span class="transport-badge badge-subway">지하철</span>
-                            <span>1호선 먹골역 4번 출구 도보 5분</span>
+                            <span>7호선 먹골역 4번 출구 <span style="white-space: nowrap;">도보 5분</span></span>
                         </li>
                         <li>
                             <span class="transport-badge badge-bus">버스</span>
-                            <span>273, 1136, 1137번 '묵동 우성아파트' 하차</span>
+                            <span>105, 146, 202, 1224, 1227, N61번 '먹골역 4번출구' 하차</span>
                         </li>
                     </ul>
                 </div>

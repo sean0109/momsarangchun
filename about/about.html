@@ -119,14 +119,14 @@
             display: block;
         }
 
-        /* 빈 이미지 자리 (재가복지센터: 사진 미정 — 그라데이션 배경) */
-        .facility-image.empty {
-            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-        }
-
         /* 사진의 아래쪽 위주로 보이게 (천장 등 위쪽 일부 가리기) */
         .facility-image.crop-bottom img {
             object-position: bottom center;
+        }
+
+        /* 사진의 위쪽 위주로 보이게 (간판 글자가 모두 보이도록) */
+        .facility-image.crop-top img {
+            object-position: top center;
         }
 
         .facility-body {
@@ -187,7 +187,7 @@
     <section class="page-hero">
         <div class="container">
             <h1>센터소개</h1>
-            <p>따뜻한 마음으로 어르신을 모시는 엄마사랑 재가복지센터입니다</p>
+            <p>따뜻한 마음으로 어르신을 모시는<br class="mobile-br">엄마사랑 재가복지센터입니다</p>
         </div>
     </section>
 
@@ -241,14 +241,16 @@
                 <span class="section-label">Facilities</span>
                 <h2 class="section-title">편안하고 안전한 <span class="highlight">센터 시설</span></h2>
                 <p class="section-description">
-                    어르신이 안심하고 머무실 수 있도록 쾌적하고 안전한 공간을 갖추고 있습니다
+                    어르신이 안심하고 머무실 수 있도록<br class="mobile-br">쾌적하고 안전한 공간을 갖추고 있습니다
                 </p>
             </div>
 
             <div class="facility-grid">
-                <!-- 재가복지센터 (1층 위치 안내, 사진 미정) -->
+                <!-- 재가복지센터 (1층 위치 안내) -->
                 <div class="facility-card">
-                    <div class="facility-image empty"></div>
+                    <div class="facility-image crop-top">
+                        <img src="../images/centerMain_01.jpeg" alt="재가복지센터 외관">
+                    </div>
                     <div class="facility-body">
                         <h3>재가복지센터</h3>
                         <p>
